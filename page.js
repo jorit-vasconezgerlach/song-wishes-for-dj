@@ -91,25 +91,27 @@ window.addEventListener('load', ()=>{
                                                   <button class="control" onclick="saveTrack(${element.id})"></button>
                                         </div>
                               `;
-
                               songList.append(newSong);
                     });
                     console.groupEnd();
           }
-
-          function player(el) {
-                    if(el.parentNode.querySelector('audio').paused) {
-                              pauseAll();
-                              el.classList.toggle('playing');
-                              el.parentNode.querySelector('audio').play();
-                    } else{
-                              el.classList.toggle('playing');
-                              el.parentNode.querySelector('audio').pause();
-                    }
-          }
           
 
-          if(onDevelopment) {
-                    search('Hello World');
+function player(el) {
+          if(el.parentNode.querySelector('audio').paused) {
+                    pauseAll();
+                    el.classList.toggle('playing');
+                    el.parentNode.querySelector('audio').play();
+          } else{
+                    el.classList.toggle('playing');
+                    el.parentNode.querySelector('audio').pause();
           }
-});
+}
+
+function pauseAll() {
+          var allAudioEls = document.querySelectorAll('audio');
+          allAudioEls.forEach(element => {
+                    element.pause();
+                    element.parentNode.querySelector('.player').classList.remove('playing');
+          });
+}
