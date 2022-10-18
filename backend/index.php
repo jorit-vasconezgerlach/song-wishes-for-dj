@@ -25,6 +25,9 @@ function putStorage($push) {
           $storage = json_encode($storage, JSON_PRETTY_PRINT);
           file_put_contents($storageRoot, $storage);
 }
+function inStorage($needle) {
+          return in_array($needle, getStorage());
+}
 function clearStorage() {
           global $storageRoot;
           file_put_contents($storageRoot, '');
