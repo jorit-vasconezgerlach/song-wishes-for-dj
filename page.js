@@ -27,7 +27,7 @@ window.addEventListener('load', ()=>{
                     var xhr = new XMLHttpRequest();
           
                     // Setup XHR Request
-                    var xhrURL = "https://tools.vasconezgerlach.de/dj-song-wishes/backend/";
+                    var xhrURL = "https://tools.vasconezgerlach.de/song-wishes-for-dj/backend/";
                     xhr.open("POST", xhrURL, true);
                     xhr.setRequestHeader("Accept", "application/json");
                     xhr.setRequestHeader('Content-Type', 'application/json');
