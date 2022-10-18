@@ -11,6 +11,7 @@
           <link rel="apple-touch-icon" href="https://jorit.vasconezgerlach.de/assets/icons/favicons/apple-touch-icon.png" type="image/png" sizes="144x144">
           <!-- Scripts -->
           <link rel="stylesheet" href="page.css">
+          <script src="page.js"> </script>
 </head>
 <body>
 
