@@ -1,3 +1,5 @@
+const onDevelopment = true;
+
 window.addEventListener('load', ()=>{
 
           const songList = document.querySelector('#songList');
@@ -101,4 +103,7 @@ window.addEventListener('load', ()=>{
           }
           
 
+          if(onDevelopment) {
+                    search('Hello World');
+          }
 });
