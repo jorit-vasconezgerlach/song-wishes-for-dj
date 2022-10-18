@@ -112,6 +112,13 @@ function pauseAll() {
                     element.parentNode.querySelector('.player').classList.remove('playing');
           });
 }
+
+function inStorage(trackId) {
+          post({
+                    trackId: trackId
+          }, 'https://tools.vasconezgerlach.de/dj-song-wishes/backend/saved/',
+          (out)=>{console.log(out)});
+}
 function post(data, to, then) {
           // Create XHR Request
           var xhr = new XMLHttpRequest();
