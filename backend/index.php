@@ -13,6 +13,23 @@ $out = array(
           'responseCode' => null
 );
 
+$storageRoot = '../storage/all.json';
+function getStorage() {
+          global $storageRoot;
+          return json_decode(file_get_contents($storageRoot), true);
+}
+function putStorage($push) {
+          global $storageRoot;
+          $storage = getStorage();
+          array_push($storage, $push);
+          $storage = json_encode($storage, JSON_PRETTY_PRINT);
+          file_put_contents($storageRoot, $storage);
+}
+function clearStorage() {
+          global $storageRoot;
+          file_put_contents($storageRoot, '');
+}
+
 function onPost($action) {
           if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo json_encode($action(), JSON_PRETTY_PRINT);
