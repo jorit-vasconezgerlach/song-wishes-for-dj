@@ -112,3 +112,28 @@ function pauseAll() {
                     element.parentNode.querySelector('.player').classList.remove('playing');
           });
 }
+function post(data, to, then) {
+          // Create XHR Request
+          var xhr = new XMLHttpRequest();
+          // Setup XHR Request
+          var xhrURL = to;
+          xhr.open("POST", xhrURL, true);
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          // On XHR Request Change
+          xhr.onreadystatechange = function () {
+                    // On XHR Ready
+                    if (xhr.readyState === 4) {
+                              // get XHR response
+                              var jsonResponse = JSON.parse(xhr.responseText);
+                              // XHR response validation
+                              if(jsonResponse.error === false) {
+                                        then(jsonResponse.out);
+                              } else {
+                                        console.warn(jsonResponse.responseMsg);
+                              }
+                    }
+          };
+          // Send XHR Request
+          xhr.send(JSON.stringify(data));
+}
