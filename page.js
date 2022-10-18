@@ -58,14 +58,6 @@ window.addEventListener('load', ()=>{
           
           }
 
-          function pauseAll() {
-                    var allAudioEls = document.querySelectorAll('audio');
-                    allAudioEls.forEach(element => {
-                              element.pause();
-                              element.parentNode.querySelector('.player').classList.remove('playing');
-                    });
-          }
-
           function fillPage(JSON) {
                     console.groupCollapsed('elements searched for:');
                     JSON.data.forEach(element => {
@@ -96,6 +88,11 @@ window.addEventListener('load', ()=>{
                     console.groupEnd();
           }
           
+          if(onDevelopment) {
+                    search('Hello%20World');
+          }
+
+});
 
 function player(el) {
           if(el.parentNode.querySelector('audio').paused) {
