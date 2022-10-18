@@ -37,15 +37,19 @@ window.addEventListener('load', ()=>{
                               if (xhr.readyState === 4) {
                                         // clear searching
                                         songList.innerHTML = "";
-                                        // Log XHR Response as JSON
+                                        // get XHR response
                                         var jsonResponse = JSON.parse(xhr.responseText);
-                                        var searchResult = JSON.parse(jsonResponse['search']);
-                                        console.log(searchResult);
+                                        // XHR response validation
+                                        if(jsonResponse.error === false) {
+                                                  var searchResult = JSON.parse(jsonResponse['out']);
                                         // Continue with search variable
                                         if(searchResult.total === 0) {
                                                   songList.innerHTML = "Nothing found!";
                                         } else {
                                                   fillPage(searchResult);
+                                        }
+                                        } else {
+                                                  console.warn('API error');
                                         }
                               }
                     };
@@ -63,7 +67,9 @@ window.addEventListener('load', ()=>{
           }
 
           function fillPage(JSON) {
+                    console.groupCollapsed('elements searched for:');
                     JSON.data.forEach(element => {
+                              console.table(element);
                               var newSong = Object.assign(document.createElement('div'), {
                                         className: "song"
 });
@@ -88,7 +94,7 @@ window.addEventListener('load', ()=>{
 
                               songList.append(newSong);
                     });
-          
+                    console.groupEnd();
           }
 
           function player(el) {
