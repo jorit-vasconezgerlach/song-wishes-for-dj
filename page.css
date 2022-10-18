@@ -118,19 +118,20 @@ input {
   background: var(--primary);
   cursor: pointer;
   border: none;
+  position: relative;
 }
 #songList .song .control.outline {
   border: .1rem solid var(--primary);
   background: transparent;
 }
-#songList .song .control.player {
-  position: relative;
+#songList .song .control::before,
+#songList .song .control::after {
+  content: '';
+  position: absolute;
 }
 #songList .song .control.player::before {
-  content: '';
   width: 0px; height: 0px;
   top: 6px; left: 6px;
-  position: absolute;
   border: 8px solid transparent;
   border-right: 0px solid white;
   border-left: 15px solid white;
@@ -144,6 +145,28 @@ input {
   border-bottom: 0px solid transparent;
   width: 5px; height: 15px;
   transform: rotate(180deg);
+}
+#songList .song .control.save::before,
+#songList .song .control.save::after {
+  width: 20px; height: 5px;
+  background: white;
+  transition: .2s ease-in-out;
+}
+#songList .song .control.save::before {
+  left: 5px; top: 12px;
+  transform: rotate(90deg);
+}
+#songList .song .control.save::after {
+  left: 5px; top: 12.5px;
+}
+#songList .song .control.save.saved::before {
+  left: 8px;
+  transform: rotate(120deg);
+}
+#songList .song .control.save.saved::after {
+  top: 16px;
+  width: 10px;
+  transform: rotate(30deg);
 }
 #songList .song audio {
   display: none;
