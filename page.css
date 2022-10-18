@@ -1,0 +1,150 @@
+/* Config */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", sans-serif;
+}
+:root {
+  /* Colors */
+  --primary: #ca3216;
+  --primaryText: var(--white);
+  --gray: #444;
+  --lightGray: #888;
+  --black: #111;
+  --white: #fff;
+  --whiteSoft: rgb(248, 222, 222);
+
+  --text: var(--white);
+  --background: var(--black);
+
+  --boxColor: var(--white);
+  --boxBackground: var(--gray);
+  --boxBorder: var(--lightGray);
+}
+
+/* Main Components */
+body {
+  padding: 60px 10px;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  background: var(--background);
+}
+header {
+  content: "";
+  top: 0;
+  right: 0;
+  padding: 45px 10px 0 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: fixed;
+  z-index: 100;
+  transition: 0.2s ease-in-out;
+}
+main {
+  width: 100%;
+  max-width: 630px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  transition: 0.2s ease-in-out;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+  caret-color: var(--primary);
+}
+#search {
+  width: 630px;
+}
+#search input {
+  padding: 0.4rem;
+  padding-right: 30px;
+  width: 100%;
+  outline: none;
+  color: var(--black);
+  font-size: 1rem;
+  border: 1px solid var(--primary);
+}
+#search input[type="submit"] {
+  color: var(--primaryText);
+  background: var(--primary);
+  cursor: pointer;
+}
+
+#songList {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+}
+#songList .song {
+          padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #55555555;
+}
+#songList .song .text {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          width: 100%;
+}
+#songList .song .text h4 {
+          width: 10vw;
+          height: 1rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+    max-width: 320px;
+}
+#songList .song .text span {
+          font-size: 0.8rem;
+}
+#songList .song span.divider {
+          width: 2px; height: 10px; background: #999; margin: 0 5px;
+}
+#songList .song .controls {
+  display: flex;
+  gap: .2rem;
+}
+#songList .song .control {
+  margin-right: 10px;
+  min-height: 30px; min-width: 30px;
+  background: var(--primary);
+  cursor: pointer;
+  border: none;
+}
+#songList .song .control.outline {
+  border: .1rem solid var(--primary);
+  background: transparent;
+}
+#songList .song .control.player {
+  position: relative;
+}
+#songList .song .control.player::before {
+  content: '';
+  width: 0px; height: 0px;
+  top: 6px; left: 6px;
+  position: absolute;
+  border: 8px solid transparent;
+  border-right: 0px solid white;
+  border-left: 15px solid white;
+  transition: .2s ease-in-out;
+  transform: rotate(0deg);
+}
+#songList .song .control.player.playing::before {
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  border-top: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  width: 5px; height: 15px;
+  transform: rotate(180deg);
+}
+#songList .song audio {
+  display: none;
+}
