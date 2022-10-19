@@ -18,43 +18,20 @@ window.addEventListener('load', ()=>{
           
                     songList.innerHTML = "searching...";
           
-                    // Set Data as JSON
-                    var data = {
-                              search: searchValue
-                    };
-          
-                    // Create XHR Request
-                    var xhr = new XMLHttpRequest();
-          
-                    // Setup XHR Request
-                    var xhrURL = "https://tools.vasconezgerlach.de/song-wishes-for-dj/backend/";
-                    xhr.open("POST", xhrURL, true);
-                    xhr.setRequestHeader("Accept", "application/json");
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    // On XHR Request Change
-                    xhr.onreadystatechange = function () {
-                              // On XHR Ready
-                              if (xhr.readyState === 4) {
-                                        // clear searching
+                    post({
+                              search: searchValue,
+                    }, 'https://tools.vasconezgerlach.de/song-wishes-for-dj/backend/search/',
+                    (response)=>{
+                              songs = JSON.parse(response);
+                              if(songs.total === 0) {
+                                        songList.innerHTML = "Nothing found!";
+                              } else {
                                         songList.innerHTML = "";
-                                        // get XHR response
-                                        var jsonResponse = JSON.parse(xhr.responseText);
-                                        // XHR response validation
-                                        if(jsonResponse.error === false) {
-                                                  var searchResult = JSON.parse(jsonResponse['out']);
-                                        // Continue with search variable
-                                        if(searchResult.total === 0) {
-                                                  songList.innerHTML = "Nothing found!";
-                                        } else {
-                                                  fillPage(searchResult);
-                                        }
-                                        } else {
-                                                  console.warn('API error');
-                                        }
+                                        fillPage(songs);
                               }
-                    };
-                    // Send XHR Request
-                    xhr.send(JSON.stringify(data));
+                    });
+
+          };
           
           }
 
