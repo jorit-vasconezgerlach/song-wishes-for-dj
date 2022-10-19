@@ -10,8 +10,8 @@
           <link rel="icon" href="https://jorit.vasconezgerlach.de/assets/icons/favicons/favicon.png" type="image/png" sizes="144x144">
           <link rel="apple-touch-icon" href="https://jorit.vasconezgerlach.de/assets/icons/favicons/apple-touch-icon.png" type="image/png" sizes="144x144">
           <!-- Scripts -->
-          <link rel="stylesheet" href="page.css">
-          <script src="page.js"> </script>
+          <link rel="stylesheet" href="page.css?v=<?php echo uniqid(); ?>">
+          <script src="page.js?v=<?php echo uniqid(); ?>"> </script>
 </head>
 <body>
 
