@@ -10,6 +10,7 @@ onPost(function() {
 
           putStorage($trackId);
 
+          $out['error'] = false;
           $out['out'] = getStorage();
 
           return $out;
