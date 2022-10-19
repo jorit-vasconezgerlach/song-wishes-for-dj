@@ -33,12 +33,19 @@ window.addEventListener('load', ()=>{
 
           };
 
-          }
           
+          // todo: load songs always in the same order
           function fillPage(JSON) {
                     console.groupCollapsed('elements searched for:');
+                    console.log(JSON);
                     JSON.data.forEach(element => {
-                              console.table(element);
+                              inStorage(element.id, (out)=>{
+                                        console.log(out);
+                                        saved = '';
+                                        // console.table(element);
+                                        if(out) {
+                                                  saved = 'saved';
+                                        }
                                         var newSong = Object.assign(document.createElement('div'), {
                                                   className: "song"
                                         });
@@ -57,10 +64,11 @@ window.addEventListener('load', ()=>{
                                                             <audio controls>
                                                                       <source src="${element.preview}" type="audio/mpeg">
                                                             </audio>
-                                                  <button class="control" onclick="saveTrack(${element.id})"></button>
+                                                            <button class="control save ${saved}" onclick="saveTrack(this, ${element.id})"></button>
                                                   </div>
                                         `;
                                         songList.append(newSong);
+                              });
                     });
                     console.groupEnd();
           }
@@ -90,11 +98,11 @@ function pauseAll() {
           });
 }
 
-function inStorage(trackId) {
+function inStorage(trackId, callback = ()=>{}) {
           post({
                     trackId: trackId
-          }, 'https://tools.vasconezgerlach.de/dj-song-wishes/backend/saved/',
-          (out)=>{console.log(out)});
+          }, 'https://tools.vasconezgerlach.de/song-wishes-for-dj/backend/saved/',
+          (response)=>{callback(response);});
 }
 
 function saveTrack(el, trackId) {
