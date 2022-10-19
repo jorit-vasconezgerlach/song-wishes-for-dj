@@ -32,39 +32,39 @@ window.addEventListener('load', ()=>{
                     });
 
           };
-          
-          }
 
+          }
+          
           function fillPage(JSON) {
                     console.groupCollapsed('elements searched for:');
                     JSON.data.forEach(element => {
                               console.table(element);
-                              var newSong = Object.assign(document.createElement('div'), {
-                                        className: "song"
-});
-                              newSong.innerHTML = `
-                                        <img src="${element.album.cover_small}"></img>
-                                        <span class="divider"></span>
-                                        <div class="text">
-                                                  <h4>${element.title}</h4>
-                                                  <span>${element.artist.name}</span>
-                                        </div>
-                                        <span class="divider"></span>
-                                        <span>${(element.duration / 60).toFixed(2).replace('.',':')}</span>
-                                        <span class="divider"></span>
-                                        <div class="controls">
-                                                  <div class="control player outline" onclick="player(this)"></div>
-                                                  <audio controls>
-                                                            <source src="${element.preview}" type="audio/mpeg">
-                                                  </audio>
+                                        var newSong = Object.assign(document.createElement('div'), {
+                                                  className: "song"
+                                        });
+                                        newSong.innerHTML = `
+                                                  <img src="${element.album.cover_small}"></img>
+                                                  <span class="divider"></span>
+                                                  <div class="text">
+                                                            <h4>${element.title}</h4>
+                                                            <span>${element.artist.name}</span>
+                                                  </div>
+                                                  <span class="divider"></span>
+                                                  <span>${(element.duration / 60).toFixed(2).replace('.',':')}</span>
+                                                  <span class="divider"></span>
+                                                  <div class="controls">
+                                                            <div class="control player outline" onclick="player(this)"></div>
+                                                            <audio controls>
+                                                                      <source src="${element.preview}" type="audio/mpeg">
+                                                            </audio>
                                                   <button class="control" onclick="saveTrack(${element.id})"></button>
-                                        </div>
-                              `;
-                              songList.append(newSong);
+                                                  </div>
+                                        `;
+                                        songList.append(newSong);
                     });
                     console.groupEnd();
           }
-          
+
           if(onDevelopment) {
                     search('Hello%20World');
           }
@@ -96,6 +96,14 @@ function inStorage(trackId) {
           }, 'https://tools.vasconezgerlach.de/dj-song-wishes/backend/saved/',
           (out)=>{console.log(out)});
 }
+
+function saveTrack(el, trackId) {
+          post({
+                    trackId: trackId
+          }, 'https://tools.vasconezgerlach.de/song-wishes-for-dj/backend/save/',
+          (response)=>{el.classList.add('saved')});
+}
+
 function post(data, to, then) {
           // Create XHR Request
           var xhr = new XMLHttpRequest();
